@@ -37,8 +37,14 @@ async function run() {
             const newCategory = req.body;
             const result = await categoryCollection.insertOne(newCategory);
             res.send(result);
+        });
+        // DELETE
+        app.delete('/category/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await categoryCollection.deleteOne(query);
+            res.send(result);
         })
-
 
     }
     finally {
