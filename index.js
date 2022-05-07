@@ -47,12 +47,22 @@ async function run() {
             res.send(result);
         });
         // Item Collection Api
+        app.get('/myitem', async (req, res) => {
+            const email = req.query.email;
+            console.log(email);
+            const query = { email: email };
+            const cursor = itemCollection.find(query);
+            const myItem = await cursor.toArray();
+            res.send(myItem)
+
+        })
+
         app.post('/item', async (req, res) => {
             const item = req.body;
             const result = await itemCollection.insertOne(item);
             res.send(result);
 
-        })
+        });
 
     }
     finally {
