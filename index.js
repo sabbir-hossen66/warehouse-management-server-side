@@ -18,6 +18,7 @@ async function run() {
     try {
         await client.connect();
         const categoryCollection = client.db('bookHouse').collection('category');
+        const itemCollection = client.db('bookHouse').collection('item')
 
         app.get('/category', async (req, res) => {
             const query = {};
@@ -44,6 +45,13 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const result = await categoryCollection.deleteOne(query);
             res.send(result);
+        });
+        // Item Collection Api
+        app.post('/item', async (req, res) => {
+            const item = req.body;
+            const result = await itemCollection.insertOne(item);
+            res.send(result);
+
         })
 
     }
