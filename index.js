@@ -63,7 +63,7 @@ async function run() {
             res.send(result);
 
         });
-        // 
+
         app.put("/category/:id", async (req, res) => {
             const id = req.params.id;
             const updatedCategory = req.body;
